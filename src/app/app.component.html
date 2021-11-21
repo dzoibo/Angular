@@ -323,31 +323,16 @@
 
   </div>
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>mes appareils</h2>
-        <p>Mis à jour : {{ lastUpdate |async| date}}</p> <!--date est un pipe angular et il premet de formater notre variable-->
-        <ul class="list-group">
-          <ul class="list-group">
-            <app-appareil  *ngFor="let appareil of appareils; let i =index"
-                       [appareilIndex]="i"
-                       [appareilName]="appareil.name"
-                       [appareilStatus]="appareil.status"></app-appareil>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li routerLinkActive="active" ><a routerLink="auth">Authentification</a> </li>
+          <li routerLinkActive="active"><a routerLink="appareils">Appareils</a></li>
         </ul>
-        </ul>
-        <button class="btn btn-success" 
-               (click)="onAllumer()"
-              [disabled]="!isAuth">
-              Tout allumer
-        </button>
-        <button class="btn btn-danger" style="margin-left: 5%;" 
-               (click)="onEteindre()"
-              [disabled]="!isAuth">
-              Tout éteindre
-        </button>
       </div>
+    </nav>
+    <div class="row">
+      <router-outlet></router-outlet>
     </div>
   </div>
-<app-first-compo></app-first-compo>
 
-<router-outlet></router-outlet>
