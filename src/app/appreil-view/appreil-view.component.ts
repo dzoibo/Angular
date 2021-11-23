@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs-compat';
 import { AppareilService } from '../services/appareil.service';
 
 @Component({
@@ -6,8 +7,9 @@ import { AppareilService } from '../services/appareil.service';
   templateUrl: './appreil-view.component.html',
   styleUrls: ['./appreil-view.component.scss']
 })
-export class AppreilViewComponent implements OnInit {
+export class AppreilViewComponent implements OnInit ,OnDestroy {
  appareils:any[''];
+ appareilSubscription !: Subscription;
   isAuth=false;
     lastUpdate: Promise<Date> = new Promise(
       (resolve, reject) => {
@@ -27,8 +29,16 @@ export class AppreilViewComponent implements OnInit {
       );
     }
     ngOnInit() {
-      this.appareils=this.appareilService.appareils;
-
+      this.appareilSubscription = this.appareilService.appareilsSubject.subscribe(
+        (appareils: any[]) => {
+          this.appareils = appareils;
+        }
+      );
+      this.appareilService.emitAppareilSubject();
+    }
+    ngOnDestroy()
+    {
+      
     }
     onAllumer() {
       console.log('On allume tout !');

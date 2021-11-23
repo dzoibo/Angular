@@ -30,7 +30,8 @@ const appRoutes: Routes = [
     AppareilComponent,
     AuthComponent,
     AppreilViewComponent,
-    FourOhFourComponent
+    FourOhFourComponent,
+    SingleAppareilComponent
   ],
   imports: [
     BrowserModule,
