@@ -19,7 +19,7 @@ const appRoutes: Routes = [
   { path: 'appareils',canActivate: [AuthGuard], component: AppreilViewComponent},
   { path: 'appareils/:id',canActivate: [AuthGuard], component: SingleAppareilComponent },
   { path: 'auth', component: AuthComponent },
-  { path: '', component: AppreilViewComponent },
+  { path: '',canActivate: [AuthGuard], component: AppreilViewComponent },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
