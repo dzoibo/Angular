@@ -18,7 +18,10 @@ export class AppComponent implements OnInit,OnDestroy
     {
       const counter = Observable.interval(1000);
       this.counterSubscription=counter.subscribe({
-        next: (value:number) => this.secondes = value})
+        next: (value:number) => this.secondes = value,
+        error: (e) => console.error(e),
+        complete: () => console.info('complete') 
+       })
     }
     ngOnDestroy()
     {
