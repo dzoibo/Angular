@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import{HttpClientModule} from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';/*ces deux importations permettent respectivement d'utiliser la methode reactive et la methode reactive sur les formulaires*/ 
 
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule
   ],

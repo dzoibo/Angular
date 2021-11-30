@@ -1,9 +1,13 @@
 import { Subject } from "rxjs-compat";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
-
+@Injectable() // permet d'injecter un service dans un autre service
 export class AppareilService {
   
   appareilsSubject = new Subject <any[]>();
+  constructor(private httpClient:HttpClient)
+  {}
   
   private appareils = [
         {
@@ -71,4 +75,30 @@ export class AppareilService {
       this.appareils[i].status = 'éteint';
       this.emitAppareilSubject();
   }
+  saveAppareilsToServer() {
+    this.httpClient
+      .put('https://dembele-9cc39-default-rtdb.firebaseio.com/appareils.json', this.appareils)
+      .subscribe(
+        () => {
+          console.log('Enregistrement terminé !');
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+}
+getAppareilsFromServer() {
+  this.httpClient
+    .get<any[]>('https://dembele-9cc39-default-rtdb.firebaseio.com/appareils.json')
+    .subscribe(
+      (response) => {
+        this.appareils = response;
+        this.emitAppareilSubject();
+        console.log('recupération accomplie');
+      },
+      (error) => {
+        console.log('Erreur ! : ' + error);
+      }
+    );
+}
 }

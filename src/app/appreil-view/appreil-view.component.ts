@@ -40,6 +40,14 @@ export class AppreilViewComponent implements OnInit ,OnDestroy {
     {
       
     }
+    onFetch()
+    {
+      this.appareilService.getAppareilsFromServer();
+    }
+    onSave()
+    {
+      this.appareilService.saveAppareilsToServer();
+    } // cette ligne permet de faire appel à la methode saveAppareil qu'il y'a dans le service
     onAllumer() {
       console.log('On allume tout !');
       this.appareilService.switchOnAll();
